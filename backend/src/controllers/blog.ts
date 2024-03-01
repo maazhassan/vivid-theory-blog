@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { blog } from '../models/blog.model.js';
-import { Op } from 'sequelize';
+import { Op, ValidationError } from 'sequelize';
 
 export const getPosts = async (req: Request, res: Response) => {
   const search = req.query.search || '';
@@ -22,4 +22,27 @@ export const getPost = async (req: Request, res: Response) => {
   const { slug } = req.params;
   const blogPost = await blog.findOne({ where: { slug } });
   res.json(blogPost);
+};
+
+export const addPost = async (req: Request, res: Response) => {
+  const { title, content, image } = req.body;
+
+  if (!title || !content || !image) {
+    return res.status(400).send('Title, content, and image are required.');
+  }
+
+  const slug = title.toLowerCase().split(' ').join('-');
+  const published_at = new Date();
+  
+  blog.create({ title, slug, content, image, published_at })
+    .then(() => res.sendStatus(201))
+    .catch((error: ValidationError) => {
+      console.error(error.message);
+      if (error.name === 'SequelizeUniqueConstraintError') {
+        res.status(409).send('A post with that title already exists.');
+      }
+      else {
+        res.sendStatus(500);
+      }
+    });
 };
