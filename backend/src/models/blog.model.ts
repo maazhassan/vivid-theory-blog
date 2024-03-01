@@ -6,10 +6,10 @@ export class blog extends Model<InferAttributes<blog>, InferCreationAttributes<b
   declare slug: string;
   declare content: string;
   declare image: string;
-  declare published_at: CreationOptional<Date>;
+  declare published_at: CreationOptional<Date> | null;
   declare created_at: CreationOptional<Date>;
   declare updated_at: CreationOptional<Date>;
-  declare deleted_at: CreationOptional<Date>;
+  declare deleted_at: CreationOptional<Date> | null;
 }
 
 export default (sequelize: Sequelize) => {
