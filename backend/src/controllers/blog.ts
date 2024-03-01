@@ -11,7 +11,7 @@ export const getPosts = async (req: Request, res: Response) => {
         [Op.iLike]: `%${search}%`
       }
     },
-    order: [['published_at', 'ASC']],
+    order: [['published_at', 'DESC']],
     limit: 6,
     attributes: ['title', 'slug', 'image', 'published_at']
   });
@@ -33,7 +33,7 @@ export const addPost = async (req: Request, res: Response) => {
 
   const slug = title.toLowerCase().split(' ').join('-');
   const published_at = new Date();
-  
+
   blog.create({ title, slug, content, image, published_at })
     .then(() => res.sendStatus(201))
     .catch((error: ValidationError) => {
