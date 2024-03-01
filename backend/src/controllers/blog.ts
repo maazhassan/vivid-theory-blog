@@ -46,3 +46,9 @@ export const addPost = async (req: Request, res: Response) => {
       }
     });
 };
+
+export const deletePost = async (req: Request, res: Response) => {
+  const { slug } = req.params;
+  await blog.destroy({ where: { slug } });
+  res.sendStatus(204);
+}
