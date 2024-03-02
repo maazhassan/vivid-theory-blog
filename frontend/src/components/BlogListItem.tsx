@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Blog } from '../types/blog';
+import { Blog } from '@/types/blog';
 
 interface BlogListItemProps {
   blog: Blog;
