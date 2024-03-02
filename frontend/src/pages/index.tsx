@@ -11,9 +11,9 @@ export default function BlogSearchPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [totalPages, setTotalPages] = useState(0);
 
-  const searchBlogs = async (search: string, page: number) => {
+  const searchBlogs = async (search: string, page: number, content: boolean) => {
     try {
-      const { blogs: fetchedBlogs, total } = await getBlogs(search, page);
+      const { blogs: fetchedBlogs, total } = await getBlogs(search, page, content);
       setBlogs(fetchedBlogs);
       setTotalPages(Math.ceil(total / 6));
       console.log("Fetched blogs:", fetchedBlogs);
@@ -35,7 +35,7 @@ export default function BlogSearchPage() {
           published_at: "2021-08-01"
         }}
       />
-      <button onClick={async () => {await searchBlogs("", 1)}}>Search</button>
+      <button onClick={async () => {await searchBlogs("", 1, true)}}>Search</button>
     </main>
   );
 }

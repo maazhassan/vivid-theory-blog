@@ -1,7 +1,7 @@
 export interface Blog {
   slug: string;
   title: string;
-  content: string;
+  content?: string;
   published_at: string;
   image?: string;
 }
