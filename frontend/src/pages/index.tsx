@@ -52,7 +52,7 @@ export default function BlogSearchPage() {
         />
         <div className="flex flex-col justify-center">
           {blogs.map((blog) => (
-            <BlogListItem key={blog.slug} blog={blog} className="my-2"/>
+            <BlogListItem key={blog.slug} blog={blog} className="my-1"/>
           ))}
         </div>
         <Pagination
