@@ -4,6 +4,8 @@ import { Op, ValidationError } from 'sequelize';
 
 export const getPosts = async (req: Request, res: Response) => {
   const search = req.query.search || '';
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 6;
 
   const blogs = await blog.findAll({
     where: {
@@ -12,8 +14,9 @@ export const getPosts = async (req: Request, res: Response) => {
       }
     },
     order: [['published_at', 'DESC']],
-    limit: 6,
-    attributes: ['title', 'slug', 'image', 'published_at']
+    limit: limit,
+    offset: (page - 1) * limit,
+    attributes: ['title', 'content', 'slug', 'image', 'published_at']
   });
   res.json(blogs);
 };
