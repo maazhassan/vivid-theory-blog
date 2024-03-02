@@ -6,6 +6,7 @@ export const getPosts = async (req: Request, res: Response) => {
   const search = req.query.search || '';
   const page = req.query.page || 1;
   const limit = req.query.limit || 6;
+  const content = req.query.content === "" ? true : false;
 
   const blogs = await blog.findAll({
     where: {
@@ -16,7 +17,10 @@ export const getPosts = async (req: Request, res: Response) => {
     order: [['published_at', 'DESC']],
     limit: limit,
     offset: (page - 1) * limit,
-    attributes: ['title', 'content', 'slug', 'image', 'published_at']
+    attributes: [
+      ...(content ? ['content'] : []), // Only include content if the query parameter is set
+      'title', 'slug', 'image', 'published_at'
+    ]
   });
   res.json(blogs);
 };
