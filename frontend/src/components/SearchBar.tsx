@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Blog } from '@/types/blog';
 import { getBlogs } from '@/services/api';
 import Link from 'next/link';
@@ -12,13 +12,15 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ search, onInputChange, onSearch }) => {
   const [suggestions, setSuggestions] = useState<Blog[]>([]);
 
+  const delayDebounceRef = useRef<NodeJS.Timeout>();
+
   useEffect(() => {
     if (!search) {
       setSuggestions([]);
       return;
     }
 
-    const delayDebounce = setTimeout(async () => {
+    delayDebounceRef.current = setTimeout(async () => {
       try {
         const { blogs: fetchedBlogs } = await getBlogs(search, 1, 4, false);
         setSuggestions(fetchedBlogs);
@@ -27,17 +29,19 @@ const SearchBar: React.FC<SearchBarProps> = ({ search, onInputChange, onSearch }
       }
     }, 300);
 
-    return () => clearTimeout(delayDebounce);
+    return () => clearTimeout(delayDebounceRef.current);
   }, [search]);
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      clearTimeout(delayDebounceRef.current);
       setSuggestions([]);
       onSearch();
     }
   }
 
   const handleClickSearch = () => {
+    clearTimeout(delayDebounceRef.current);
     setSuggestions([]);
     onSearch();
   }
