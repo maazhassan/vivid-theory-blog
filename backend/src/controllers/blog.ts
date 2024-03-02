@@ -8,7 +8,7 @@ export const getPosts = async (req: Request, res: Response) => {
   const limit = req.query.limit || 6;
   const content = req.query.content === "" ? true : false;
 
-  const blogs = await blog.findAll({
+  const { count, rows } = await blog.findAndCountAll({
     where: {
       title: {
         [Op.iLike]: `%${search}%`
@@ -22,7 +22,7 @@ export const getPosts = async (req: Request, res: Response) => {
       'title', 'slug', 'image', 'published_at'
     ]
   });
-  res.json(blogs);
+  res.json({ blogs: rows, total: count});
 };
 
 export const getPost = async (req: Request, res: Response) => {
