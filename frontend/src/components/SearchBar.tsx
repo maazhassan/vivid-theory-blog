@@ -22,7 +22,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ search, onInputChange, onSearch }
       try {
         const { blogs: fetchedBlogs } = await getBlogs(search, 1, 4, false);
         setSuggestions(fetchedBlogs);
-        console.log(fetchedBlogs);
       } catch (error) {
         console.error("Error fetching suggestions:", error);
       }
@@ -61,7 +60,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ search, onInputChange, onSearch }
           Search
         </button>
       </div>
-      <div className="absolute flex flex-col justify-center w-full top-full">
+      <div className="absolute flex flex-col justify-center w-full top-full z-10">
         {suggestions.map((blog) => (
           <Link href={`/${blog.slug}`} key={blog.slug}>
             <div className="border border-gray-300 shadow p-2 rounded-md bg-white hover:bg-slate-300 hover:cursor-pointer">

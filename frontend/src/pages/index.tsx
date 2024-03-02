@@ -6,6 +6,7 @@ import { Blog } from "@/types/blog";
 import { useState, useEffect } from "react";
 import Pagination from "@/components/Pagination";
 import SearchBar from "@/components/SearchBar";
+import MoonLoader from "react-spinners/MoonLoader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,6 +15,7 @@ export default function BlogSearchPage() {
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     searchBlogs("", currentPage);
@@ -21,8 +23,10 @@ export default function BlogSearchPage() {
 
   const searchBlogs = async (search: string, page: number) => {
     try {
+      setLoading(true);
       const { blogs: fetchedBlogs, total } = await getBlogs(search, page, 6, true);
       setBlogs(fetchedBlogs);
+      // setLoading(false);
       setTotalPages(Math.ceil(total / 6));
     } catch (error) {
       console.error("Error fetching blogs:", error);
@@ -50,10 +54,13 @@ export default function BlogSearchPage() {
           onInputChange={handleInputChange}
           onSearch={handleSearch}
         />
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center relative">
           {blogs.map((blog) => (
             <BlogListItem key={blog.slug} blog={blog} className="my-1"/>
           ))}
+          <div className="absolute w-fit top-6 right-0 left-0 mx-auto -z-10">
+            <MoonLoader color="#000" loading={loading} size={50} />
+          </div>
         </div>
         <Pagination
           currentPage={currentPage}
