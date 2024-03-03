@@ -27,7 +27,10 @@ export const getPosts = async (req: Request, res: Response) => {
 
 export const getPost = async (req: Request, res: Response) => {
   const { slug } = req.params;
-  const blogPost = await blog.findOne({ where: { slug } });
+  const blogPost = await blog.findOne({
+    where: { slug },
+    attributes: ['title', 'slug', 'content', 'image', 'published_at']
+  });
   res.json(blogPost);
 };
 
