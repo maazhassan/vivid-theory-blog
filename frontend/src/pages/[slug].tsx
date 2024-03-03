@@ -52,7 +52,7 @@ const SingleBlogPage: React.FC = () => {
         priority={true}
       />
       <p className="text-gray-600 mb-8">{new Date(blog.published_at).toDateString()}</p>
-      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content!) }} className="mb-12"></div>
+      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content!) }} className="mb-12" />
       {relatedBlogs.length > 0 && (
         <div className="w-fit mb-8">
           <h2 className="text-lg font-semibold mb-2">Related Blogs:</h2>
