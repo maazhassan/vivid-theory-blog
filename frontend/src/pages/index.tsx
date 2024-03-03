@@ -1,4 +1,3 @@
-import { Inter } from "next/font/google";
 import Head from "next/head";
 import BlogListItem from "@/components/BlogListItem";
 import { getBlogs } from "@/services/api";
@@ -7,8 +6,6 @@ import { useState, useEffect } from "react";
 import Pagination from "@/components/Pagination";
 import SearchBar from "@/components/SearchBar";
 import MoonLoader from "react-spinners/MoonLoader";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function BlogSearchPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -43,7 +40,7 @@ export default function BlogSearchPage() {
   }
 
   return (
-    <main className={inter.className}>
+    <>
       <Head>
         <title>Blog Search</title>
       </Head>
@@ -68,6 +65,6 @@ export default function BlogSearchPage() {
           onPageChange={setCurrentPage}
         />
       </div>
-    </main>
+    </>
   );
 }
