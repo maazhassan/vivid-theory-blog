@@ -1,4 +1,4 @@
-\c vivid;
+\c vivid_blog_challenge;
 INSERT INTO Blogs (title, slug, content, image, published_at, created_at, updated_at)
 VALUES ('Sample Blog Post 1', 'sample-blog-post-1', '<p>This is a sample blog post content in HTML format.</p>', 'mountains.jpeg', '2024-02-29', '2024-02-29', '2024-02-29');
 
