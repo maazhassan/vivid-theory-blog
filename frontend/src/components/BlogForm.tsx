@@ -29,6 +29,11 @@ const BlogForm: React.FC<BlogFormProps> = ({ redirect }) => {
         e.target.value = "";
         return;
       }
+      if (e.target.files[0].type !== 'image/jpeg' && e.target.files[0].type !== 'image/png') {
+        alert('File type must be .jpeg, .jpg or .png');
+        e.target.value = "";
+        return;
+      }
       const file = e.target.files[0];
       setFormData(prevState => ({
         ...prevState,
