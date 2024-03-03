@@ -51,7 +51,7 @@ const SingleBlogPage: React.FC = () => {
         className="rounded-md w-full mb-2 max-h-[36rem]"
         priority={true}
       />
-      <p className="text-gray-600 mb-8">{new Date(blog.published_at).toDateString()}</p>
+      <p className="text-gray-600 mb-8">{new Date(blog.published_at + "T00:00:00").toDateString()}</p>
       <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content!) }} className="mb-12" />
       {relatedBlogs.length > 0 && (
         <div className="w-fit mb-8">
