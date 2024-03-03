@@ -6,8 +6,10 @@ import { useState, useEffect } from "react";
 import Pagination from "@/components/Pagination";
 import SearchBar from "@/components/SearchBar";
 import MoonLoader from "react-spinners/MoonLoader";
+import { useRouter } from "next/router";
 
 export default function BlogSearchPage() {
+  const router = useRouter();
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +25,7 @@ export default function BlogSearchPage() {
       setLoading(true);
       const { blogs: fetchedBlogs, total } = await getBlogs(search, page, 6, true);
       setBlogs(fetchedBlogs);
-      // setLoading(false);
+      setLoading(false);
       setTotalPages(Math.ceil(total / 6));
     } catch (error) {
       console.error("Error fetching blogs:", error);
@@ -45,7 +47,15 @@ export default function BlogSearchPage() {
         <title>Blog Search</title>
       </Head>
       <div className="container mx-auto">
-        <h1 className="text-4xl font-semibold my-4">Blog Search</h1>
+        <div className="flex flex-row justify-between mt-4 mb-8">
+          <h1 className="text-4xl font-semibold">Blog Search</h1>
+          <button
+            onClick={() => router.push("/create")}
+            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors"
+          >
+            New Post +
+          </button>
+        </div>
         <SearchBar
           search={search}
           onInputChange={handleInputChange}

@@ -58,7 +58,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ search, onInputChange, onSearch }
           onKeyDown={handleEnter}
         />
         <button
-          className="bg-blue-500 text-white p-4 rounded-md"
+          className="bg-blue-500 text-white p-4 rounded-md hover:bg-blue-600 transition-colors"
           onClick={handleClickSearch}
         >
           Search

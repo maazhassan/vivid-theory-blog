@@ -1,4 +1,4 @@
-import { Blog, BlogSearchResult } from "@/types/blog";
+import { Blog, NewBlog, BlogSearchResult } from "@/types/blog";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -25,6 +25,20 @@ export const getBlog = async (slug: string): Promise<Blog> => {
     return data;
   } catch (error) {
     throw new Error("An error occurred while fetching the data");
+  }
+}
+
+export const createBlog = async (formData: FormData): Promise<void> => {
+  try {
+    const res = await fetch(`${API_URL}/v1/posts`, {
+      method: 'POST',
+      body: formData
+    });
+    if (!res.ok) {
+      throw new Error("Network response was not ok");
+    }
+  } catch (error) {
+    throw new Error("An error occurred while creating the blog");
   }
 }
 
