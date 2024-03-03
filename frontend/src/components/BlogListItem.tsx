@@ -9,7 +9,7 @@ interface BlogListItemProps {
 
 const BlogListItem: React.FC<BlogListItemProps> = ({ blog, className }) => {
   const content = blog.content ? blog.content.substring(0, 100).replace(/(<([^>]+)>)/ig, '') : '';
-  const utcDate = new Date(blog.published_at + "T07:00:00Z");
+  const utcDate = new Date(blog.published_at + "T00:00:00");
   console.log(utcDate);
 
   return (
