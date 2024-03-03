@@ -19,7 +19,7 @@ const SingleBlogPage: React.FC = () => {
         if (typeof slug === 'string') {
           const [fetchedBlog, fetchedRelatedBlogs] = await Promise.all([
             getBlog(slug),
-            getBlogs('', 1, 4, false)
+            getBlogs('', 1, 4, false, slug)
           ]);
           setBlog(fetchedBlog);
           setRelatedBlogs(fetchedRelatedBlogs.blogs);
