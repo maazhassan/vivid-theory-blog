@@ -56,7 +56,7 @@ export default function BlogSearchPage() {
         />
         <div className="flex flex-col justify-center relative">
           {blogs.map((blog) => (
-            <BlogListItem key={blog.slug} blog={blog} className="my-1"/>
+            <BlogListItem key={blog.slug} blog={blog} className="my-1 p-4"/>
           ))}
           <div className="absolute w-fit top-6 right-0 left-0 mx-auto -z-10">
             <MoonLoader color="#000" loading={loading} size={50} />
