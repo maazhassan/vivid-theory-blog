@@ -16,9 +16,12 @@ const BlogListItem: React.FC<BlogListItemProps> = ({ blog, className }) => {
         <span className="text-lg font-semibold hover:underline">{blog.title}</span>
       </Link>
       <p className="text-gray-600">{new Date(blog.published_at).toDateString()}</p>
-      <div className="mt-2">
-        <p>{content}...</p> {/* Just a preview of the content */}
-      </div>
+      {
+        content &&
+        <div className="mt-2">
+          <p>{content}...</p> {/* Just a preview of the content */}
+        </div>
+      }
     </div>
   );
 };

@@ -41,12 +41,12 @@ const SingleBlogPage: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="container mx-auto">
       <h1 className="text-2xl font-semibold">{blog.title}</h1>
       <p className="text-gray-600 mb-4">{new Date(blog.published_at).toDateString()}</p>
       <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content!) }} className="mb-4"></div>
       {relatedBlogs.length > 0 && (
-        <div>
+        <div className="w-fit">
           <h2 className="text-lg font-semibold mb-2">Related Blogs:</h2>
           {relatedBlogs.map((relatedBlog) => (
             <BlogListItem key={relatedBlog.slug} blog={relatedBlog} />
