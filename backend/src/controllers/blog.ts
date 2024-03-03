@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { blog } from '../models/blog.model.js';
 import { Op, ValidationError } from 'sequelize';
+import { getSlugFromTitle } from '../utils/slug.js';
 
 export const getPosts = async (req: Request, res: Response) => {
   const search = req.query.search || '';
@@ -39,13 +40,14 @@ export const getPost = async (req: Request, res: Response) => {
 };
 
 export const addPost = async (req: Request, res: Response) => {
-  const { title, content, image } = req.body;
+  const { title, content } = req.body;
+  const image = req.file!.filename;
 
   if (!title || !content || !image) {
     return res.status(400).send('Title, content, and image are required.');
   }
 
-  const slug = title.toLowerCase().split(' ').join('-');
+  const slug = getSlugFromTitle(title);
   const published_at = new Date();
 
   blog.create({ title, slug, content, image, published_at })

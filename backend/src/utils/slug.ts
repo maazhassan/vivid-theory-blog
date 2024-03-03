@@ -1,0 +1,1 @@
+export const getSlugFromTitle = (title: string) => title.toLowerCase().split(' ').join('-');
