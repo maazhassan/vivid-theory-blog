@@ -1,6 +1,10 @@
-CREATE DATABASE vivid;
+\echo 'Delete and recreate the database vivid_blog_challenge?'
+\prompt 'Return for yes or control-C to cancel > ' foo
 
-\c vivid;
+DROP DATABASE IF EXISTS vivid_blog_challenge;
+CREATE DATABASE vivid_blog_challenge;
+
+\c vivid_blog_challenge;
 
 CREATE TABLE Blogs
 (
