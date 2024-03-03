@@ -3,8 +3,8 @@ import { getSlugFromTitle } from '../utils/slug.js';
 
 const storage = multer.diskStorage({
   destination: 'public/images',
-  filename(req, file, cb) {
-    cb(null, `${getSlugFromTitle(req.body.title)}.${file.originalname.split('.').pop()}`);
+  async filename(req, file, cb) {
+    cb(null, `${await getSlugFromTitle(req.body.title)}.${file.originalname.split('.').pop()}`);
   }
 });
 

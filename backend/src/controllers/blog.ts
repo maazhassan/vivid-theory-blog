@@ -47,7 +47,7 @@ export const addPost = async (req: Request, res: Response) => {
     return res.status(400).send('Title, content, and image are required.');
   }
 
-  const slug = getSlugFromTitle(title);
+  const slug = await getSlugFromTitle(title);
   const published_at = new Date();
 
   blog.create({ title, slug, content, image, published_at })
@@ -55,7 +55,7 @@ export const addPost = async (req: Request, res: Response) => {
     .catch((error: ValidationError) => {
       console.error(error.message);
       if (error.name === 'SequelizeUniqueConstraintError') {
-        res.status(409).send('A post with that title already exists.');
+        res.status(409).send('A post with that slug already exists.');
       }
       else {
         res.sendStatus(500);
