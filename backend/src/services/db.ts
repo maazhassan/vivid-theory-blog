@@ -7,10 +7,12 @@ dotenv.config();
 const postgres_database = process.env.POSTGRES_DB || 'postgres';
 const postgres_user = process.env.POSTGRES_USER || 'postgres';
 const postgres_password = process.env.POSTGRES_PASSWORD || 'postgres';
+const postgres_port = process.env.POSTGRES_PORT || 5432;
 
 export const sequelize = new Sequelize(postgres_database, postgres_user, postgres_password, {
   host: 'localhost',
-  dialect: 'postgres'
+  dialect: 'postgres',
+  port: typeof postgres_port === 'string' ? parseInt(postgres_port) : postgres_port,
 });
 
 export const testDbConnection = async () => {
