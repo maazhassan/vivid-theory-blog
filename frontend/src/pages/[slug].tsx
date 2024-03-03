@@ -41,7 +41,7 @@ const SingleBlogPage: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto mt-2">
       <h1 className="text-2xl font-semibold">{blog.title}</h1>
       <p className="text-gray-600 mb-4">{new Date(blog.published_at).toDateString()}</p>
       <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content!) }} className="mb-4"></div>
