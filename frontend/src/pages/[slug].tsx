@@ -53,13 +53,19 @@ const SingleBlogPage: React.FC = () => {
       <p className="text-gray-600 mb-8">{new Date(blog.published_at).toDateString()}</p>
       <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content!) }} className="mb-8"></div>
       {relatedBlogs.length > 0 && (
-        <div className="w-fit">
+        <div className="w-fit mb-8">
           <h2 className="text-lg font-semibold mb-2">Related Blogs:</h2>
           {relatedBlogs.map((relatedBlog) => (
             <BlogListItem key={relatedBlog.slug} blog={relatedBlog} className="p-2"/>
           ))}
         </div>
       )}
+      <button
+        className="bg-red-500 text-white p-4 rounded-md mb-4"
+        onClick={() => router.push(`/delete/${blog.slug}`)}
+      >
+        Delete This Blog
+      </button>
     </div>
   );
 }

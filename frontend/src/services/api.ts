@@ -27,3 +27,16 @@ export const getBlog = async (slug: string): Promise<Blog> => {
     throw new Error("An error occurred while fetching the data");
   }
 }
+
+export const deleteBlog = async (slug: string): Promise<void> => {
+  try {
+    const res = await fetch(`${API_URL}/v1/posts/${slug}`, {
+      method: 'DELETE'
+    });
+    if (!res.ok) {
+      throw new Error("Network response was not ok");
+    }
+  } catch (error) {
+    throw new Error("An error occurred while deleting");
+  }
+}
