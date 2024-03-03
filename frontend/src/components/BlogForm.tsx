@@ -24,7 +24,7 @@ const BlogForm: React.FC<BlogFormProps> = ({ redirect }) => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      if (e.target.files[0].size > 5242880) {
+      if (e.target.files[0].size > 5000000) {
         alert('File size must be less than 5MB');
         e.target.value = "";
         return;
