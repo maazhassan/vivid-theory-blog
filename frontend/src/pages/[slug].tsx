@@ -62,7 +62,7 @@ const SingleBlogPage: React.FC = () => {
         </div>
       )}
       <button
-        className="bg-red-500 text-white p-4 rounded-md mb-4"
+        className="bg-red-500 text-white p-4 rounded-md mb-4 hover:bg-red-600 transition-colors"
         onClick={() => router.push(`/delete/${blog.slug}`)}
       >
         Delete This Blog
