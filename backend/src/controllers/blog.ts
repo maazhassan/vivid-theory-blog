@@ -7,11 +7,15 @@ export const getPosts = async (req: Request, res: Response) => {
   const page = req.query.page || 1;
   const limit = req.query.limit || 6;
   const content = req.query.content === "" ? true : false;
+  const exclude = req.query.exclude || '';
 
   const { count, rows } = await blog.findAndCountAll({
     where: {
       title: {
-        [Op.iLike]: `%${search}%`
+        [Op.iLike]: `%${search}%`,
+      },
+      slug: {
+        [Op.not]: exclude
       }
     },
     order: [['published_at', 'DESC']],
