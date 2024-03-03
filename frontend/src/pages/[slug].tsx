@@ -49,7 +49,7 @@ const SingleBlogPage: React.FC = () => {
         <div className="w-fit">
           <h2 className="text-lg font-semibold mb-2">Related Blogs:</h2>
           {relatedBlogs.map((relatedBlog) => (
-            <BlogListItem key={relatedBlog.slug} blog={relatedBlog} />
+            <BlogListItem key={relatedBlog.slug} blog={relatedBlog} className="p-2"/>
           ))}
         </div>
       )}

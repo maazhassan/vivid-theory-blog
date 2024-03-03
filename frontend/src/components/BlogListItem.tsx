@@ -11,7 +11,7 @@ const BlogListItem: React.FC<BlogListItemProps> = ({ blog, className }) => {
   const content = blog.content ? blog.content.substring(0, 100).replace(/(<([^>]+)>)/ig, '') : '';
 
   return (
-    <div className={`border border-gray-200 p-4 rounded-md bg-white ${className}`}>
+    <div className={`border border-gray-200 rounded-md bg-white ${className}`}>
       <Link href={`/${blog.slug}`}>
         <span className="text-lg font-semibold hover:underline">{blog.title}</span>
       </Link>
