@@ -52,8 +52,8 @@ const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({ redirect, class
     <div className={`container mx-auto w-fit text-center bg-slate-300 p-4 rounded-md ${className}`}>
       <h1 className="text-2xl font-semibold mb-4">Delete Blog</h1>
       <p className="text-gray-700 mb-4">Are you sure you want to delete the blog &quot;{blog.title}&quot;?</p>
-      <button onClick={handleDelete} className="bg-red-500 text-white px-4 py-2 mr-2 rounded-md">Delete</button>
-      <button onClick={handleCancel} className="bg-gray-500 text-white px-4 py-2 rounded-md">Cancel</button>
+      <button onClick={handleDelete} className="bg-red-500 text-white px-4 py-2 mr-2 rounded-md hover:bg-red-600 transition-colors">Delete</button>
+      <button onClick={handleCancel} className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors">Cancel</button>
     </div>
   );
 };
