@@ -5,6 +5,7 @@ import MoonLoader from 'react-spinners/MoonLoader';
 import BlogListItem from '@/components/BlogListItem';
 import { useRouter } from 'next/router';
 import DOMPurify from 'dompurify';
+import Image from 'next/image';
 
 const SingleBlogPage: React.FC = () => {
   const router = useRouter();
@@ -41,10 +42,16 @@ const SingleBlogPage: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto mt-2">
-      <h1 className="text-2xl font-semibold">{blog.title}</h1>
-      <p className="text-gray-600 mb-4">{new Date(blog.published_at).toDateString()}</p>
-      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content!) }} className="mb-4"></div>
+    <div className="container mx-auto mt-8 w-1/2">
+      <h1 className="text-3xl mb-4 font-semibold">{blog.title}</h1>
+      <Image
+        src={blog.image!}
+        alt={blog.title} 
+        height={1920} width={1080}
+        className="rounded-md w-full mb-2 max-h-[28rem]"
+      />
+      <p className="text-gray-600 mb-8">{new Date(blog.published_at).toDateString()}</p>
+      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content!) }} className="mb-8"></div>
       {relatedBlogs.length > 0 && (
         <div className="w-fit">
           <h2 className="text-lg font-semibold mb-2">Related Blogs:</h2>
